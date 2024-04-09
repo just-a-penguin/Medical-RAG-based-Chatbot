@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Submission</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .submission-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: calc(100% - 30px);
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .projects-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .project-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .project-item h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .project-details {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="submission-container">
+        <h1>Forms Submission</h1>
+        <form action="/create_resume" method="post">
+            <div class="form-group">
+                <label for="username">User Name:</label>
+                <input type="text" id="username" name="username" value="{{ user_info['username'] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="linkedin">LinkedIn:</label>
+                <input type="text" id="linkedin" name="linkedin" value="{{ user_info['linkedin'] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user_info['email'] }}">
+            </div>
+            <div class="form-group">
+                <label for="github">Github:</label>
+                <input type="text" id="github" name="github" value="{{ user_info['github'] }}">
+            </div>
+
+            <div class="form-group">
+                <label for="contact">Contact No:</label>
+                <input type="text" id="contact" name="contact" value="{{ user_info['contact'] }}">
+            </div>
+
+            <h2>Projects:</h2>
+            <ul class="projects-list">
+                {% for project in user_info['projects'] %}
+                <li class="project-item">
+                    <h2>{{ project['name'] }}</h2>
+                    <div class="project-details">
+
+                        <p><strong>Description:</strong> {{ project['description'] }}</p>
+                        <p><strong>Duration:</strong> {{ project['duration'] }}</p>
+                        <p><strong>Date:</strong> {{ project['date'] }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <h2>Experiences:</h2>
+            <ul class="experiences-list">
+                {% for experience in user_info['experience'] %}
+                <li class="experience-item">
+                    <h2>{{ experience['title'] }}</h2>
+                    <div class="experience-details">
+                        <p><strong>Company:</strong> {{ experience['company'] }}</p>
+                        <p><strong>Jobtitle:</strong>{{experience['Jobtitle']}}</p>
+                        <p><strong>Duration:</strong> {{ experience['duration'] }}</p>
+                        <p><strong>Description:</strong> {{ experience['description'] }}</p>
+            
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <h2> Education:</h2>
+            <ul class="education-list">
+                {% for education in user_info['education'] %}
+                <li class="education-item">
+                    <h2>{{ education['degree'] }}</h2>
+                    <div class="education-details">
+                        <p><strong>Institute:</strong> {{ education['institute'] }}</p>
+                        <p><strong>Year:</strong> {{ education['year'] }}</p>
+                    </div>
+                </li>
+                
+                {% endfor %}
+            </ul>
+            <h2> Awards and Achievements</h2>
+            <ul class="awards-list">
+                {% for award in user_info['awardsAndAchievements'] %}
+                <li class="award-item">
+                    <h2>{{ award['name'] }}</h2>
+                    <div class="award-details">2
+                        <p><strong>Year:</strong> {{ award['year'] }}</p>
+                        <p><strong>Description:</strong> {{ award['description'] }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <h2> Position of Responsibility</h2>
+            <ul class="position-list">
+                {% for position in user_info['positionOfResponsibility'] %}
+                <li class="position-item">
+                    <h2>{{ position['name'] }}</h2>
+                    <div class="position-details">
+                        <p><strong>Year:</strong> {{ position['year'] }}</p>
+                        <p><strong>Description:</strong> {{ position['description'] }}</p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            
+
+
+            <h2>Skills :</h2>
+            <div class="form-group">
+                <label for="Languages">Languages:</label>
+                <input type="text" id="Languages" name="Languages" value="{{ user_info['languages'] }}">
+            </div>  
+            <div class="form-group">
+                <label for="Tools">Tools:</label>
+                <input type="text" id="Tools" name="Tools" value="{{ user_info['tools'] }}">
+            </div>
+            <div class="form-group">
+                <label for="Frameworks">Frameworks:</label>
+                <input type="text" id="Frameworks" name="Frameworks" value="{{ user_info['frameworks'] }}">
+            </div>
+            <input type="submit" value="Create Resume">
+        </form>
+    </div>
+</body>
+</html>

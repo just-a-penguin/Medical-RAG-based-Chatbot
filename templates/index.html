@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("https://img.lovepik.com/background/20211022/large/lovepik-medical-background-map-of-science-and-technology-image_500748360.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-container input[type="file"],
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            margin-right: 5px;
+        }
+
+        .input-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .chat-container {
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .chat-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .user-message {
+            background-color: #d6e0f0;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #c8e6c9;
+            text-align: left;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        /* Additional Styles for Bullets and Bold Text */
+        .message ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 20px;
+        }
+
+        .message ul li {
+            list-style-type: disc;
+            margin-bottom: 5px;
+        }
+
+        .message strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Medical Chatbot</h1>
+    <p>Upload an image or type a message to start chatting with the bot.</p>
+    <div class="container">
+        <div class="input-container">
+            <form id="upload-form" enctype="multipart/form-data">
+                <input type="file" name="file" id="file" accept="image/*">
+                <button type="submit">Upload Image</button>
+            </form>
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-message" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send Text</button>
+        </div>
+        <div class="chat-container">
+            <div class="chat-box" id="chat-box"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("upload-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            uploadImage();
+        });
+
+        function scrollChatToTop() {
+            var chatBox = document.getElementById("chat-box");
+            chatBox.scrollTop = 0;
+        }
+    
+        function uploadImage() {
+            var formData = new FormData();
+            var fileInput = document.getElementById("file");
+            var file = fileInput.files[0];
+            formData.append("file", file);
+    
+            fetch("/chat", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                appendMessage("bot", data);
+                scrollChatToTop();
+            });
+        }
+    
+        function sendMessage() {
+            var userMessage = document.getElementById("user-message").value;
+            appendMessage("user", userMessage);
+            document.getElementById("user-message").value = "";
+            fetch("/chat", {
+                method: "POST",
+                body: new URLSearchParams({
+                    user_message: userMessage
+                }),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            })
+            .then(response => response.text())
+            .then(data => {
+                appendMessage("bot", data);
+                scrollChatToTop();
+            });
+        }
+    
+        function appendMessage(sender, message) {
+            var chatBox = document.getElementById("chat-box");
+            var messageDiv = document.createElement("div");
+            messageDiv.className = "message " + sender + "-message";
+            messageDiv.innerHTML = message;
+            chatBox.appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>
