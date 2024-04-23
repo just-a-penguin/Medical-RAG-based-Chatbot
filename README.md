@@ -34,8 +34,7 @@ Follow these detailed steps to get a development environment running:
    cd IR_projectGrp53
    ```
 
-2. **Set up a virtual environment** (recommended):
-   Run **app.py** file to visit the website 
+2. Run **app.py** file to visit the website 
 
 
 ### Usage
