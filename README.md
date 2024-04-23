@@ -35,25 +35,8 @@ Follow these detailed steps to get a development environment running:
    ```
 
 2. **Set up a virtual environment** (recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   ```
+   Run **app.py** file to visit the website 
 
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Run migrations** (for Django application setup):
-   ```bash
-   python manage.py migrate
-   ```
-
-5. **Start the development server**:
-   ```bash
-   python manage.py runserver
-   ```
 
 ### Usage
 
