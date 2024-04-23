@@ -21,7 +21,7 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them:
 
 - Python 3.8 or later
-- Django 3.1 or later
+- Flask module 
 - Additional Python libraries as listed in the `requirements.txt` file
 
 ### Installation
