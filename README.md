@@ -39,7 +39,7 @@ Follow these detailed steps to get a development environment running:
 
 ### Usage
 
-Navigate to `http://127.0.0.1:8000/` in your web browser to access the user interface.
+Navigate to `http://127.0.0.1:5000/` in your web browser to access the user interface.
 
 #### Example Interactions
 
