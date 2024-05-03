@@ -1,5 +1,10 @@
-Sanskar Ranjan: RAG model and confidence score
-Jeremiah Rokhum: OCR and datasets
-Vishal Singh:  RAG model and 
-Aishiki Bhattacharya: OCR and UI 
-Saketh Ragorila: UI and datasets
+- **Sanskar Ranjan:** 
+  - **Focus:** RAG model and confidence score
+- **Jeremiah Rokhum:** 
+  - **Focus:** OCR and datasets
+- **Vishal Singh:** 
+  - **Focus:** RAG model
+- **Aishiki Bhattacharya:** 
+  - **Focus:** OCR and UI
+- **Saketh Ragorila:** 
+  - **Focus:** UI and datasets
